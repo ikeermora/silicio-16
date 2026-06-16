@@ -157,6 +157,16 @@ Used by: `ADD`, `SUB`, `AND`, `OR`, `XOR`, `SIM`
 +---------+--------+-------+-------+--------+
 ```
 
+Field breakdown:
+
+- `Opcode`: 4 bits
+- `rd`: 3 bits
+- `ra`: 3 bits
+- `rb`: 3 bits
+- `unused`: 3 bits
+
+Total: `4 + 3 + 3 + 3 + 3 = 16 bits`
+
 ---
 
 ### I-Type
@@ -169,6 +179,15 @@ Used by: `LDI`
 | Opcode  |  rd    |      imm       | |
 +---------+--------+----------------+-+
 ```
+
+Field breakdown:
+
+- `Opcode`: 4 bits
+- `rd`: 3 bits
+- `imm`: 8 bits
+- `unused`: 1 bit
+
+Total: `4 + 3 + 8 + 1 = 16 bits`
 
 ---
 
@@ -183,6 +202,13 @@ Used by: `JMP`
 +---------+--------------------------+
 ```
 
+Field breakdown:
+
+- `Opcode`: 4 bits
+- `address`: 12 bits
+
+Total: `4 + 12 = 16 bits`
+
 ---
 
 ### Branch Type
@@ -195,6 +221,15 @@ Used by: `BEQ`, `BNE`
 | Opcode  |  rs    |  rt   | offset  |
 +---------+--------+-------+---------+
 ```
+
+Field breakdown:
+
+- `Opcode`: 4 bits
+- `rs`: 3 bits
+- `rt`: 3 bits
+- `offset`: 6 bits
+
+Total: `4 + 3 + 3 + 6 = 16 bits`
 
 ---
 
@@ -209,6 +244,15 @@ Used by: `CMP`
 +---------+--------+-------+---------+
 ```
 
+Field breakdown:
+
+- `Opcode`: 4 bits
+- `ra`: 3 bits
+- `rb`: 3 bits
+- `unused`: 6 bits
+
+Total: `4 + 3 + 3 + 6 = 16 bits`
+
 ---
 
 ### Register Copy Type
@@ -221,6 +265,15 @@ Used by: `MOV`
 | Opcode  |  rd    |  ra   | unused  |
 +---------+--------+-------+---------+
 ```
+
+Field breakdown:
+
+- `Opcode`: 4 bits
+- `rd`: 3 bits
+- `ra`: 3 bits
+- `unused`: 6 bits
+
+Total: `4 + 3 + 3 + 6 = 16 bits`
 
 ---
 
@@ -235,6 +288,15 @@ Used by: `LOAD`, `STORE`
 +---------+--------+-------+---------+
 ```
 
+Field breakdown:
+
+- `Opcode`: 4 bits
+- `rd`: 3 bits
+- `rs`: 3 bits
+- `unused`: 6 bits
+
+Total: `4 + 3 + 3 + 6 = 16 bits`
+
 ---
 
 ### Special Type
@@ -247,3 +309,10 @@ Used by: `NOP`, `HALT`
 | Opcode  |          unused          |
 +---------+--------------------------+
 ```
+
+Field breakdown:
+
+- `Opcode`: 4 bits
+- `unused`: 12 bits
+
+Total: `4 + 12 = 16 bits`
