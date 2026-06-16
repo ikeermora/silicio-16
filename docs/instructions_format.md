@@ -133,3 +133,100 @@ rd = R1
 ## Special Instructions
 NOP
 HALT
+
+## Field Sizes
+
+- Opcode: 4 bits
+- Register fields: 3 bits
+- Immediate: 8 bits
+- Jump address: 12 bits
+- Branch offset: 6 bits
+
+---
+
+## Instruction Layouts
+
+### R-Type
+
+Used by: `ADD`, `SUB`, `AND`, `OR`, `XOR`, `SIM`
+
+```text
+[15:12] opcode
+[11:9]  rd
+[8:6]   ra
+[5:3]   rb
+[2:0]   unused
+```
+
+### I-Type
+
+Used by: `LDI`
+
+```text
+[15:12] opcode
+[11:9]  rd
+[8:1]   imm
+[0]     unused
+```
+
+### J-Type
+
+Used by: `JMP`
+
+```text
+[15:12] opcode
+[11:0]  address
+```
+
+### Branch Type
+
+Used by: `BEQ`, `BNE`
+
+```text
+[15:12] opcode
+[11:9]  rs
+[8:6]   rt
+[5:0]   offset
+```
+
+### Compare Type
+
+Used by: `CMP`
+
+```text
+[15:12] opcode
+[11:9]  ra
+[8:6]   rb
+[5:0]   unused
+```
+
+### Register Copy Type
+
+Used by: `MOV`
+
+```text
+[15:12] opcode
+[11:9]  rd
+[8:6]   ra
+[5:0]   unused
+```
+
+### M-Type
+
+Used by: `LOAD`, `STORE`
+
+```text
+[15:12] opcode
+[11:9]  rd
+[8:6]   rs
+[5:0]   unused
+```
+
+### Special Type
+
+Used by: `NOP`, `HALT`
+
+```text
+[15:12] opcode
+[11:0]  unused
+```
