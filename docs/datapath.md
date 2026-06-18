@@ -9,7 +9,7 @@
 * Data Memory
 * Immediate Extension Unit
 * Branch / PC Logic
-* Multiplexers*
+* Multiplexers
 
 ## Hardware Blocks
 
@@ -26,25 +26,45 @@ Outputs:
 - Current PC Value: Sent to instruction memory as the instruction address.
 
 ### Instruction Memory
-Purpose: Keeps track of the instruction that is being executed by the processor. 
+Purpose: Stores the program instructions. It receives the current PC value as an address and outputs the 16-bit instruction stored at that address
 
-Inputs: 
+Inputs:
+- Program Counter **(PC)**
 
 Outputs: 
+- 16-bit Instruction address
 
 ### Instruction Register
-Purpose:
+Purpose: It keeps one instruction at a time frozen, so it does not change bits by accident. 
 
 Inputs: 
+- Instruction address bits from *Instruction Memory*
+- Clock
+- Write Enable
 
-Outputs: 
+Outputs: Instruction bits
 
 ### Control Unit
-Purpose:
+Purpose: It sends the control signals each clock cycle through the steps of execution of an instruction to the blocks across the datapath.
 
 Inputs: 
+- Clock
+- Reset
+- Opcode
+- Funct
+- Zero / ALU Flags
 
 Outputs: 
+- PCWrite
+- IRWrite / WriteEnable
+- RegWrite
+- MemWrite
+- MemRead
+- ALUSelA / ALUSelB
+- ALUOp
+- PCSrc
+- MemToReg
+
 
 ### Register File
 Purpose:
