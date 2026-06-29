@@ -163,3 +163,8 @@ Main multiplexers used in Silicio-16:
 - `PCSrc`: selects the next PC value.
 - `MemToReg`: selects the data written back to the Register File.
 - `RegDst`: selects the destination register field.
+
+
+## Datapath Schematic
+
+![Silicio-16 Datapath](diagrams/Datapath_Schematic_V_1.0.png)
