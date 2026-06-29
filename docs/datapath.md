@@ -167,4 +167,4 @@ Main multiplexers used in Silicio-16:
 
 ## Datapath Schematic
 
-![Silicio-16 Datapath](diagrams/Datapath_Schematic_V_1.0.png)
+![Silicio-16 Datapath](diagrams/Datapath_Schematic_V_1.0.drawio.png)
