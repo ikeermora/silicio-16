@@ -1,39 +1,37 @@
 # Silicio-16 Multi-Cycle Emulator
 
-Este es el **Modelo de Referencia en Software** para el procesador **Silicio-16**. Actúa como un emulador arquitectónico de bajo nivel desarrollado en Python para validar el comportamiento lógico de la CPU antes de proceder con la implementación del RTL en Verilog/SystemVerilog.
-
-A diferencia de las simulaciones de un solo ciclo, este emulador modela de forma precisa una **arquitectura estructural multiciclo**, reflejando fielmente el diagrama de bloques del hardware.
+This is the **Software Reference Model** for the **Silicio-16** processor. It acts as a low-level architectural emulator developed in Python to validate the CPU's logical behavior before proceeding with the RTL implementation in Verilog/SystemVerilog. Unlike single-cycle simulations, this emulator accurately models a **multi-cycle structural architecture**, faithfully reflecting the hardware's block diagram.
 
 ---
 
-## 🚀 Características del Emulador
+## 🚀 Emulator Features
 
-* **Máquina de Estados Finitos (FSM):** Ejecución basada en ciclos de reloj reales a través de etapas de control dedicadas.
-* **Registros Temporales de Hardware:** Simulación de buffers intermedios del silicio:
-  * `IR` (Instruction Register)
-  * `A Register` y `B Register` (Salidas del Register File)
-  * `ALUOut` (Registro de salida de la ALU)
-  * `MDR` (Memory Data Register)
-* **Simulación de Señales de Control:** Modelado de multiplexores (`ALUSelA`, `ALUSelB`) y operaciones de la ALU (`ALUOp`) manejadas por la Unidad de Control.
-* **Comportamiento de 16 bits:** Enmascaramiento estricto (`& 0xFFFF`) en todas las operaciones aritméticas y lógicas para emular el desbordamiento real del hardware.
-
----
-
-## ⚙️ Arquitectura de la FSM (Ciclo de Reloj)
-
-Cada instrucción se procesa de forma secuencial dividida en las siguientes etapas físicas:
-
-1. **`FETCH`:** El `PC` apunta a la memoria de instrucciones, se extrae la tupla y se almacena en el *Instruction Register* (`IR`).
-2. **`DECODE`:** La Unidad de Control analiza el tamaño y Opcode en el `IR`, activa los selectores de los MUX correspondientes y carga los valores reales desde el *Register File* hacia los registros temporales `A` y `B`.
-3. **`EXECUTE`:** La ALU procesa los datos de los registros intermedios según la señal `ALUOp` y deposita el resultado en `ALUOut`.
-4. **`WRITEBACK`:** El resultado de `ALUOut` se escribe de vuelta en el registro destino del *Register File* y se incrementa el `PC` para el siguiente ciclo.
+* **Finite State Machine (FSM):** Execution based on real clock cycles through dedicated control stages.
+* **Hardware Temporary Registers:** Simulation of silicon intermediate buffers:
+    * `IR` (Instruction Register)
+    * `A Register` and `B Register` (Register File outputs)
+    * `ALUOut` (ALU output register)
+    * `MDR` (Memory Data Register)
+* **Control Signal Simulation:** Modeling of multiplexers (`ALUSelA`, `ALUSelB`) and ALU operations (`ALUOp`) managed by the Control Unit.
+* **16-bit Behavior:** Strict masking (`& 0xFFFF`) on all arithmetic and logical operations to emulate real hardware overflow.
 
 ---
 
-## 📁 Estructura del Proyecto
+## ⚙️ FSM Architecture (Clock Cycle)
+
+Each instruction is processed sequentially, divided into the following physical stages:
+
+1. **`FETCH`:** The `PC` points to the instruction memory, the tuple is extracted, and it is stored in the *Instruction Register* (`IR`).
+2. **`DECODE`:** The Control Unit analyzes the size and Opcode in the `IR`, activates the corresponding MUX selectors, and loads the actual values from the *Register File* into the temporary registers `A` and `B`.
+3. **`EXECUTE`:** The ALU processes the data from the intermediate registers according to the `ALUOp` signal and deposits the result in `ALUOut`.
+4. **`WRITEBACK`:** The result from `ALUOut` is written back to the destination register in the *Register File*, and the `PC` is incremented for the next cycle.
+
+---
+
+## 📁 Project Structure
 
 ```text
 emulator/
-├── main.py       # Director de orquesta, carga el programa e itera los ciclos de reloj.
-├── cpu.py        # CPU estructural (FSM, Registros microarquitectónicos y ALU).
-└── memory.py     # Componente de memoria unificada para instrucciones y datos.
+├── main.py       # Orchestrator; loads the program and iterates the clock cycles.
+├── cpu.py        # Structural CPU (FSM, microarchitectural registers, and ALU).
+└── memory.py     # Unified memory component for instructions and data.
