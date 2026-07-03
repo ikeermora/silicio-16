@@ -10,6 +10,10 @@
 * Immediate Extension Unit
 * Branch / PC Logic
 * Multiplexers
+* A Register
+* B Register
+* ALUOut Register
+* Memory Data Register
 
 ## Hardware Blocks
 

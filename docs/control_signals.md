@@ -259,7 +259,7 @@ For `BNE`, the PC updates if the Zero Flag is 0.
 Total Duration: 3 Cycles (Cycles 1 & 2 are common)
 
 ### Cycle 3: Execute
-During this cycle, we connect the two registers we want to compare to the ALU input ports and perform the substraction.
+During this cycle, we connect the two registers we want to compare to the ALU input ports and perform the subtraction.
 
 Control Signals:
 

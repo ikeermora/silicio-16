@@ -94,13 +94,15 @@ LDI rd, immediate
 
 Syntax:
 
-LOAD rd, address
+LOAD rd, rs
+Description: rd = Memory[rs]
 
 ### STORE
 
 Syntax:
 
-STORE rd, address
+STORE rd, rs
+Description: Memory[rs] = rd
 
 ---
 
@@ -116,13 +118,13 @@ CMP ra, rb
 
 Syntax:
 
-BEQ address
+BEQ rs, rt, offset
 
 ### BNE
 
 Syntax:
 
-BNE address
+BNE rs, rt, offset
 
 ### JMP
 
