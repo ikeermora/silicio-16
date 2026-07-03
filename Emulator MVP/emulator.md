@@ -1,24 +1,39 @@
-# Silicio-16 Emulator (MVP)
+# Silicio-16 Multi-Cycle Emulator
 
-Este es el **Modelo de Referencia en Software** para el procesador **Silicio-16**. Actúa como un emulador arquitectónico básico desarrollado en Python para validar el comportamiento lógico de la CPU antes de proceder con la implementación del RTL en Verilog/SystemVerilog.
+Este es el **Modelo de Referencia en Software** para el procesador **Silicio-16**. Actúa como un emulador arquitectónico de bajo nivel desarrollado en Python para validar el comportamiento lógico de la CPU antes de proceder con la implementación del RTL en Verilog/SystemVerilog.
 
----
-
-##  Características del MVP
-
-* **Registros de 16 bits:** Simulación estricta de 8 registros de propósito general (`R0` a `R7`) y un Program Counter (`PC`). Los resultados aritméticos y lógicos están enmascarados a 16 bits (`0xFFFF`).
-* **Memoria Aislada:** Arquitectura limpia con separación lógica entre memoria y unidad de procesamiento.
-* **Ejecución Paso a Paso:** Ciclo interactivo *Fetch-Execute* que permite inspeccionar los cambios en los registros tras cada ciclo de reloj.
-* **Volcado de Estado (Register Dump):** Monitoreo dinámico en la terminal para facilitar la depuración.
+A diferencia de las simulaciones de un solo ciclo, este emulador modela de forma precisa una **arquitectura estructural multiciclo**, reflejando fielmente el diagrama de bloques del hardware.
 
 ---
 
-##  Estructura del Proyecto
+## 🚀 Características del Emulador
 
-El emulador está organizado de la siguiente manera:
+* **Máquina de Estados Finitos (FSM):** Ejecución basada en ciclos de reloj reales a través de etapas de control dedicadas.
+* **Registros Temporales de Hardware:** Simulación de buffers intermedios del silicio:
+  * `IR` (Instruction Register)
+  * `A Register` y `B Register` (Salidas del Register File)
+  * `ALUOut` (Registro de salida de la ALU)
+  * `MDR` (Memory Data Register)
+* **Simulación de Señales de Control:** Modelado de multiplexores (`ALUSelA`, `ALUSelB`) y operaciones de la ALU (`ALUOp`) manejadas por la Unidad de Control.
+* **Comportamiento de 16 bits:** Enmascaramiento estricto (`& 0xFFFF`) en todas las operaciones aritméticas y lógicas para emular el desbordamiento real del hardware.
+
+---
+
+## ⚙️ Arquitectura de la FSM (Ciclo de Reloj)
+
+Cada instrucción se procesa de forma secuencial dividida en las siguientes etapas físicas:
+
+1. **`FETCH`:** El `PC` apunta a la memoria de instrucciones, se extrae la tupla y se almacena en el *Instruction Register* (`IR`).
+2. **`DECODE`:** La Unidad de Control analiza el tamaño y Opcode en el `IR`, activa los selectores de los MUX correspondientes y carga los valores reales desde el *Register File* hacia los registros temporales `A` y `B`.
+3. **`EXECUTE`:** La ALU procesa los datos de los registros intermedios según la señal `ALUOp` y deposita el resultado en `ALUOut`.
+4. **`WRITEBACK`:** El resultado de `ALUOut` se escribe de vuelta en el registro destino del *Register File* y se incrementa el `PC` para el siguiente ciclo.
+
+---
+
+## 📁 Estructura del Proyecto
 
 ```text
 emulator/
-├── main.py       # Punto de entrada, programa de prueba y bucle interactivo.
-├── cpu.py        # Unidad central de procesamiento (Registros, Fetch y Execute).
-└── memory.py     # Componente de memoria para instrucciones y datos de prueba.
+├── main.py       # Director de orquesta, carga el programa e itera los ciclos de reloj.
+├── cpu.py        # CPU estructural (FSM, Registros microarquitectónicos y ALU).
+└── memory.py     # Componente de memoria unificada para instrucciones y datos.
