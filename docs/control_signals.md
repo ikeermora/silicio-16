@@ -287,7 +287,7 @@ Control Signals:
 `RegWrite = 0`
 `MemWrite = 0`
 `ALUOutWrite = 0`
-`Branch = 0`
+
 
 --- 
 
@@ -304,7 +304,7 @@ Control Signals:
 `MemRead = 0`
 `ALUOutWrite = 0`
 `PCWrite = 0`
-`Branch = 0`
+
 
 *The PC should've moved to PC + 1 during the common fetch cycle, so the processor moves clean to the next cycle*
 
