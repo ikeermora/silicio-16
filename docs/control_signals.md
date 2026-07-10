@@ -63,11 +63,24 @@ Silicio-16 uses a multicycle control unit. The control unit activates different 
 ---
 
 ### ALUOp
-| Value | Operation |
+
+For Silicio-16 v1.0, `ALUOp` uses the same 4-bit opcode values defined in `opcode_table.md`.
+
+| ALUOp | Operation |
 |---|---|
-| 0000 | ADD / pass address |
-| 0001 | SUB / compare |
-| opcode | Use instruction opcode for R-Type |
+| 0001 | ADD |
+| 0010 | SUB |
+| 0011 | AND |
+| 0100 | OR |
+| 0101 | XOR |
+| 0110 | SIM |
+| 0111 | MOV / pass A |
+| 1000 | LDI / pass B |
+| 1001 | LOAD address pass |
+| 1010 | STORE address pass |
+| 1011 | CMP / subtract |
+| 1100 | BEQ / subtract |
+| 1101 | BNE / subtract |
 
 --- 
 
@@ -89,7 +102,7 @@ Control Signals:
 `PCWrite = 1`
 `ALUSelA = 0`
 `ALUSelB = 01`
-`ALUOp = 0000`
+`ALUOp = 0001`
 `PCSrc = 00`
 
 ---
@@ -180,7 +193,7 @@ Control Signals:
 
 `ALUSelA = 1`
 `ALUSelB = 00`
-`ALUOp = 0000`
+`ALUOp = 1001`
 `ALUOutWrite = 1`
 `MemRead = 0`
 `RegWrite = 0`
@@ -218,7 +231,7 @@ The address of the saved memory in rs is passed through the ALU.
 Control Signals: 
 `ALUSelA = 1`
 `ALUSelB = 00`
-`ALUOp = 0000`
+`ALUOp = 1010`
 `ALUOutWrite = 1`
 `MemWrite = 0`
 `RegWrite = 0`
@@ -244,7 +257,7 @@ During this cycle, we connect both registers to the ALU so it can do the compari
 Control Signals:
 `ALUSelA = 1`
 `ALUSelB = 00`
-`ALUOp = 0001`
+`ALUOp = 1011`
 `FlagsWrite = 1`
 `RegWrite = 0`
 `MemWrite = 0`
@@ -267,11 +280,12 @@ Control Signals:
 `PCSrc = 01`
 `ALUSelA = 1`
 `ALUSelB = 00`
-`ALUOp = 0001`
 `RegWrite = 0`
 `MemWrite = 0`
 `ALUOutWrite = 0`
 
+BEQ: ALUOp = 1100
+BNE: ALUOp = 1101
 
 ---
 
