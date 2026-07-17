@@ -1,0 +1,227 @@
+$date
+	Fri Jul 17 09:14:49 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module alu_tb $end
+$var wire 1 ! zero $end
+$var wire 16 " alu_result [15:0] $end
+$var reg 16 # a [15:0] $end
+$var reg 4 $ alu_op [3:0] $end
+$var reg 16 % b [15:0] $end
+$scope module uut $end
+$var wire 16 & a [15:0] $end
+$var wire 4 ' alu_op [3:0] $end
+$var wire 16 ( b [15:0] $end
+$var wire 1 ! zero $end
+$var parameter 4 ) OP_ADD $end
+$var parameter 4 * OP_AND $end
+$var parameter 4 + OP_BEQ $end
+$var parameter 4 , OP_BNE $end
+$var parameter 4 - OP_CMP $end
+$var parameter 4 . OP_HALT $end
+$var parameter 4 / OP_JMP $end
+$var parameter 4 0 OP_LDI $end
+$var parameter 4 1 OP_LOAD $end
+$var parameter 4 2 OP_MOV $end
+$var parameter 4 3 OP_NOP $end
+$var parameter 4 4 OP_OR $end
+$var parameter 4 5 OP_SIM $end
+$var parameter 4 6 OP_STORE $end
+$var parameter 4 7 OP_SUB $end
+$var parameter 4 8 OP_XOR $end
+$var reg 16 9 alu_result [15:0] $end
+$scope begin $ivl_for_loop0 $end
+$var integer 32 : i [31:0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+b101 8
+b10 7
+b1010 6
+b110 5
+b100 4
+b0 3
+b111 2
+b1001 1
+b1000 0
+b1110 /
+b1111 .
+b1011 -
+b1101 ,
+b1100 +
+b11 *
+b1 )
+$end
+#0
+$dumpvars
+b0 :
+b0 9
+b0 (
+b0 '
+b0 &
+b0 %
+b0 $
+b0 #
+b0 "
+1!
+$end
+#10000
+b101011001111000 %
+b101011001111000 (
+b1001000110100 #
+b1001000110100 &
+#20000
+0!
+b11001 "
+b11001 9
+b1 $
+b1 '
+b1010 %
+b1010 (
+b1111 #
+b1111 &
+#30000
+0!
+b101111100 "
+b101111100 9
+b10 $
+b10 '
+b1111000 %
+b1111000 (
+b111110100 #
+b111110100 &
+#40000
+0!
+b111100001111 "
+b111100001111 9
+b11 $
+b11 '
+b1111111111111111 %
+b1111111111111111 (
+b111100001111 #
+b111100001111 &
+#50000
+0!
+b1111111111111111 "
+b1111111111111111 9
+b100 $
+b100 '
+b111100001111 %
+b111100001111 (
+b1111000011110000 #
+b1111000011110000 &
+#60000
+0!
+b101010110101010 "
+b101010110101010 9
+b111 $
+b111 '
+b111111111111 %
+b111111111111 (
+b101010110101010 #
+b101010110101010 &
+#70000
+0!
+b10100000 "
+b10100000 9
+b1001 $
+b1001 '
+b100 %
+b100 (
+b10100000 #
+b10100000 &
+#80000
+0!
+b10110000 "
+b10110000 9
+b1010 $
+b1010 '
+b1000 %
+b1000 (
+b10110000 #
+b10110000 &
+#90000
+1!
+b0 "
+b0 9
+b1100 $
+b1100 '
+b11001 %
+b11001 (
+b11001 #
+b11001 &
+#100000
+0!
+b1111 "
+b1111 9
+b1101 $
+b1101 '
+b1010 %
+b1010 (
+#110000
+0!
+b1111111111 "
+b1111111111 9
+b1110 $
+b1110 '
+b0 %
+b0 (
+b1111111111 #
+b1111111111 &
+#120000
+1!
+b0 "
+b0 9
+b1111 $
+b1111 '
+b101011001111000 %
+b101011001111000 (
+b1001000110100 #
+b1001000110100 &
+#130000
+b1011 $
+b1011 '
+b1010010110100101 %
+b1010010110100101 (
+b1010010110100101 #
+b1010010110100101 &
+#140000
+0!
+b101101001100000 "
+b101101001100000 9
+b101 $
+b101 '
+b1010101010101010 %
+b1010101010101010 (
+b1111000011001010 #
+b1111000011001010 &
+#150000
+b10000 :
+0!
+b1100 "
+b1100 9
+b110 $
+b110 '
+b1111000000001111 %
+b1111000000001111 (
+b1111111100001111 #
+b1111111100001111 &
+#160000
+0!
+b1010101111001101 "
+b1010101111001101 9
+b1000 $
+b1000 '
+b1010101111001101 %
+b1010101111001101 (
+b1111111111111111 #
+b1111111111111111 &
+#170000

@@ -47,14 +47,12 @@ always_comb begin
         end
         
         OP_SIM: begin 
-            OP_SIM: begin
                 alu_result = 16'd0;
                 for (int i = 0; i < 16; i++) begin
                 if (a[i] == b[i]) begin
                     alu_result = alu_result + 1;
                  end
                 end
-            end
         end
 
         OP_MOV: begin 

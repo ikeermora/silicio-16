@@ -1,0 +1,102 @@
+$date
+	Fri Jul 17 11:43:50 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module pc_tb $end
+$var wire 16 ! current_pc [15:0] $end
+$var reg 1 " clk $end
+$var reg 16 # next_pc [15:0] $end
+$var reg 1 $ pc_write $end
+$var reg 1 % reset $end
+$scope module uut $end
+$var wire 1 " clk $end
+$var wire 16 & next_pc [15:0] $end
+$var wire 1 $ pc_write $end
+$var wire 1 % reset $end
+$var reg 16 ' current_pc [15:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+b0 '
+b1000000000000 &
+1%
+0$
+b1000000000000 #
+0"
+b0 !
+$end
+#5000
+1"
+#10000
+0"
+#12000
+0%
+#15000
+1"
+#20000
+0"
+#22000
+b1 #
+b1 &
+1$
+#25000
+b1 !
+b1 '
+1"
+#30000
+0"
+#32000
+b10 #
+b10 &
+#35000
+b10 !
+b10 '
+1"
+#40000
+0"
+#42000
+b11 #
+b11 &
+#45000
+b11 !
+b11 '
+1"
+#50000
+0"
+#52000
+b101011111010 #
+b101011111010 &
+0$
+#55000
+1"
+#60000
+0"
+#65000
+1"
+#70000
+0"
+#72000
+b0 !
+b0 '
+1%
+#75000
+1"
+#80000
+0"
+#82000
+0%
+#85000
+1"
+#90000
+0"
+#92000
