@@ -1,0 +1,71 @@
+$date
+	Sat Jul 18 15:01:55 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module alu_out_register_tb $end
+$var wire 16 ! alu_out [15:0] $end
+$var reg 1 " alu_out_write $end
+$var reg 16 # alu_result [15:0] $end
+$var reg 1 $ clk $end
+$var reg 1 % rst_n $end
+$scope module uut $end
+$var wire 1 " alu_out_write $end
+$var wire 16 & alu_result [15:0] $end
+$var wire 1 $ clk $end
+$var wire 1 % rst_n $end
+$var reg 16 ' alu_out [15:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+b0 '
+b0 &
+0%
+0$
+b0 #
+0"
+b0 !
+$end
+#5000
+1$
+#10000
+0$
+#12000
+1%
+#15000
+1$
+#20000
+1"
+b101010110101010 #
+b101010110101010 &
+0$
+#25000
+b101010110101010 !
+b101010110101010 '
+1$
+#30000
+0"
+b1111111111111111 #
+b1111111111111111 &
+0$
+#35000
+1$
+#40000
+1"
+b101000101100 #
+b101000101100 &
+0$
+#45000
+b101000101100 !
+b101000101100 '
+1$
+#46000
