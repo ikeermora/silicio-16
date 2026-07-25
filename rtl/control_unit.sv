@@ -96,11 +96,18 @@ module control_unit(
 
             // 3rd Cycle, transitions from execute
             S_EXEC_R: next_state = S_WB_R;
-            S_EXEC_MEM: next_state = (opcode == OP_LOAD) ? S_MEM_READ: S_MEM_WRITE;
-            S_EXEC_CMP: next_state = S_FETCH;
+
+            S_EXEC_MEM: begin
+                if (opcode == OP_LOAD)
+                    next_state = S_MEM_READ;
+                else
+                    next_state = S_MEM_WRITE;
+            end
+
+            S_EXEC_CMP:    next_state = S_FETCH;
             S_EXEC_BRANCH: next_state = S_FETCH;
-            S_EXEC_JMP: next_state = S_FETCH;
-            S_EXEC_NOP: next_state = S_FETCH;
+            S_EXEC_JMP:    next_state = S_FETCH;
+            S_EXEC_NOP:    next_state = S_FETCH;
 
             // Transitions from Memory, 4th cycle
             S_MEM_READ: next_state = S_WB_LOAD;
