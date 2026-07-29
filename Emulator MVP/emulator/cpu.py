@@ -140,6 +140,9 @@ class CPU:
             elif len(self.ir) == 3:
                 self.a_reg = 0
                 self.b_reg = self.ir[2]
+            elif len(self.ir) == 2:
+                self.a_reg = 0
+                self.b_reg = self.ir[1]
             self.cycle = 3
             return True
 
@@ -158,8 +161,8 @@ class CPU:
                 elif self.ALUOp == "XOR":
                     self.alu_out = (self.a_reg ^ self.b_reg) & 0xFFFF 
                 elif self.ALUOp == "SIM":
-                    temp = (self.a_reg & self.b_reg)
-                    self.alu_out = bin(temp).count('1') & 0xFFFF
+                    temp = bin((self.a_reg ^ self.b_reg) & 0xFFFF)
+                    self.alu_out = temp.count('1')
                 
                 # Actualización de flags (Ej: después de un SUB proveniente de un CMP)
                 if self.FlagsWrite == 1:
