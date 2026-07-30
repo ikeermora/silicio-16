@@ -153,13 +153,14 @@ module cpu(
 
     register_file rf_inst (
         .clk(clk),
+        .reset(~rst_n),               
         .reg_write(reg_write),
-        .read_reg_1(ra_field),
-        .read_reg_2(rb_field),
+        .read_reg1(ra_field),      
+        .read_reg2(rb_field),
         .write_reg(write_reg_addr),
         .write_data(write_data_reg),
-        .read_data_1(reg_read_data_1),
-        .read_data_2(reg_read_data_2)
+        .read_data1(reg_read_data_1), 
+        .read_data2(reg_read_data_2)
     );
 
     always_ff @(posedge clk or negedge rst_n) begin 
