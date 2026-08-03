@@ -131,11 +131,11 @@ module cpu(
     );
 
     pc pc_inst (
-        .clk(clk),
-        .rst_n(rst_n),
-        .pc_write_enable(pc_write | pc_write_enable),
+.clk(clk),
+        .reset(~rst_n),                  
+        .pc_write(pc_write | pc_write_enable),
         .next_pc(next_pc),
-        .pc_current(pc_current)
+        .current_pc(pc_current)               
     );
 
     instruction_memory inst_mem_inst (
@@ -145,7 +145,7 @@ module cpu(
 
     instruction_register ir_inst (
         .clk(clk),
-        .rst_n(rst_n),
+        .reset(~rst_n), 
         .ir_write(ir_write),
         .instruction_in(instruction_raw),
         .instruction_out(instruction)
@@ -177,15 +177,15 @@ module cpu(
     immediate_ext imm_ext_inst (
         .instruction(instruction),
         .imm_src(imm_src),
-        .extended_imm(extended_imm)
+        .ext_imm(extended_imm)
     );
 
     alu alu_inst (
-        .operand_a(alu_operand_a),
-        .operand_b(alu_operand_b),
+        .a(alu_operand_a),      
+        .b(alu_operand_b),      
         .alu_op(alu_op),
         .alu_result(alu_result),
-        .zero_flag(alu_zero_flag)
+        .zero(alu_zero_flag)   
     );
 
     alu_out_register alu_out_reg_inst (
@@ -209,7 +209,7 @@ module cpu(
         .clk(clk),
         .rst_n(rst_n),
         .mdr_write(mdr_write),
-        .read_data(mem_read_data),
+        .mem_data(mem_read_data),
         .mdr_out(mdr_out)
     );
 endmodule
