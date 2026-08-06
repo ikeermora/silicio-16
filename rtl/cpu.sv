@@ -55,6 +55,8 @@ module cpu(
     logic [15:0] write_data_reg;
     logic [15:0] reg_read_data_1;
     logic [15:0] reg_read_data_2;
+    logic [2:0] read_reg_addr_1;
+    logic [2:0] read_reg_addr_2;
     logic [15:0] a_reg_out;
     logic [15:0] b_reg_out;
 
@@ -74,6 +76,11 @@ module cpu(
     // Combinational logic and multiplexers
 
     assign write_reg_addr = (reg_dst == 1'b0) ? rd_field : rs_field;
+
+    // R-type instructions read ra/rb. CMP uses its documented
+    // [opcode][rs][rt][unused] format and therefore reads rd/ra.
+    assign read_reg_addr_1 = (opcode == 4'hB) ? rd_field : ra_field;
+    assign read_reg_addr_2 = (opcode == 4'hB) ? ra_field : rb_field;
 
     always_comb begin 
         case (mem_to_reg) 
@@ -168,8 +175,8 @@ module cpu(
         .clk(clk),
         .reset(~rst_n),               
         .reg_write(reg_write),
-        .read_reg1(ra_field),      
-        .read_reg2(rb_field),
+        .read_reg1(read_reg_addr_1),
+        .read_reg2(read_reg_addr_2),
         .write_reg(write_reg_addr),
         .write_data(write_data_reg),
         .read_data1(reg_read_data_1), 
