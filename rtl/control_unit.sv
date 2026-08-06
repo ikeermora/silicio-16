@@ -18,11 +18,11 @@ module control_unit(
     output logic [1:0] pc_src,
     output logic [1:0] mem_to_reg,
     output logic reg_dst,
-    output logic imm_src,
     output logic halt_cpu,
     output logic alu_out_write,
     output logic mdr_write,
-    output logic flags_write
+    output logic flags_write,
+    output logic [1:0] imm_src
 );
 
     // Opcodes - Refer to Opcode table in Docs if necessary
@@ -142,7 +142,7 @@ module control_unit(
         pc_src        = 2'b00;
         mem_to_reg    = 2'b00;
         reg_dst       = 0;
-        imm_src       = 0;
+        imm_src       = 2'b00;
         halt_cpu      = 0;
         alu_out_write = 0;
         mdr_write     = 0;
@@ -211,22 +211,17 @@ module control_unit(
             flags_write = 1;
         end
 
-        S_EXEC_BRANCH: begin 
-      //      pc_write_cond = 1;
-            pc_src = 2'b10;
-            alu_sel_a = 1;
-            alu_sel_b = 2'b00;
-            alu_op = opcode;
+    S_EXEC_BRANCH: begin
+        pc_write_cond = 1'b1;
+        pc_src        = 2'b01;
 
-            // BEQ Bug Fix
-            if (opcode == OP_BEQ)
-                pc_write_cond = zero_flag; // Jump if equals
-            else if (opcode == OP_BNE)
-                pc_write_cond = ~zero_flag;
-            else
-                pc_write_cond = 0;
-
-        end
+        // PC actual ya apunta a la siguiente instrucción.
+        // Destino = PC + offset con signo.
+        alu_sel_a     = 1'b0;
+        alu_sel_b     = 2'b10;
+        alu_op        = OP_ADD;
+        imm_src       = 2'b01;
+    end
         
         S_EXEC_JMP: begin 
             pc_write = 1;

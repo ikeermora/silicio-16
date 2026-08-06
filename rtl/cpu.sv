@@ -18,8 +18,8 @@ module cpu(
     logic [3:0] alu_op;
     logic [1:0] pc_src;
     logic [1:0] mem_to_reg;
+    logic [1:0] imm_src;
     logic       reg_dst;
-    logic       imm_src;
     logic       halt_cpu;
     logic       alu_out_write;
     logic       mdr_write;
@@ -129,21 +129,26 @@ module cpu(
         .zero_out(zero_flag_reg)       
     );
     pc_logic pc_logic_inst (
-        .pc_src(pc_src),
-        .pc_write_cond(pc_write_cond), 
-        .alu_result(alu_result),
-        .branch_target(alu_out),
-        .jump_target({4'b0000, jump_address}),
-        .next_pc(next_pc),
-        .pc_write_enable(pc_write_enable)
+
+        .pc_src          (pc_src),
+        .pc_write_cond   (pc_write_cond),
+        .zero_flag       (zero_flag_reg),
+        .pc_write        (pc_write),
+        .opcode          (opcode),
+        .alu_result      (alu_result),
+        .branch_target   (alu_result),
+        .jump_target     ({4'b0000, jump_address}),
+        .next_pc         (next_pc),
+        .pc_write_enable (pc_write_enable)
+
     );
 
     pc pc_inst (
-.clk(clk),
-        .reset(~rst_n),                  
-        .pc_write(pc_write | pc_write_enable),
-        .next_pc(next_pc),
-        .current_pc(pc_current)               
+    .clk       (clk),
+    .reset     (~rst_n),
+    .pc_write  (pc_write_enable),
+    .next_pc   (next_pc),
+    .current_pc(pc_current)             
     );
 
     instruction_memory inst_mem_inst (
