@@ -4,6 +4,7 @@ module control_unit(
     input logic clk,
     input logic rst_n,
     input logic [3:0] opcode,
+    input logic zero_flag,
 
     output logic pc_write,
     output logic pc_write_cond,
@@ -211,11 +212,20 @@ module control_unit(
         end
 
         S_EXEC_BRANCH: begin 
-            pc_write_cond = 1;
-            pc_src = 2'b01;
+      //      pc_write_cond = 1;
+            pc_src = 2'b10;
             alu_sel_a = 1;
             alu_sel_b = 2'b00;
             alu_op = opcode;
+
+            // BEQ Bug Fix
+            if (opcode == OP_BEQ)
+                pc_write_cond = zero_flag; // Jump if equals
+            else if (opcode == OP_BNE)
+                pc_write_cond = ~zero_flag;
+            else
+                pc_write_cond = 0;
+
         end
         
         S_EXEC_JMP: begin 

@@ -24,6 +24,7 @@ module cpu(
     logic       alu_out_write;
     logic       mdr_write;
     logic       flags_write;
+    logic       zero_flag_reg;
 
     // Program counter signals and Instructions memory
     logic [15:0] next_pc;
@@ -100,6 +101,7 @@ module cpu(
         .clk(clk),
         .rst_n(rst_n),
         .opcode(opcode),
+        .zero_flag(zero_flag_reg),
         .pc_write(pc_write),
         .pc_write_cond(pc_write_cond),
         .ir_write(ir_write),
@@ -119,10 +121,16 @@ module cpu(
         .flags_write(flags_write)
     );
 
+    flags_register flags_reg_inst (
+        .clk(clk),
+        .rst_n(rst_n),
+        .flags_write(flags_write),     
+        .zero_in(alu_zero_flag),       
+        .zero_out(zero_flag_reg)       
+    );
     pc_logic pc_logic_inst (
         .pc_src(pc_src),
-        .pc_write_cond(pc_write_cond),
-        .zero_flag(alu_zero_flag),
+        .pc_write_cond(pc_write_cond), 
         .alu_result(alu_result),
         .branch_target(alu_out),
         .jump_target({4'b0000, jump_address}),

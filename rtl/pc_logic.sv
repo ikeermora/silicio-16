@@ -4,7 +4,6 @@ module pc_logic(
 
     input logic [1:0] pc_src,
     input logic pc_write_cond,
-    input logic zero_flag,
     input logic [15:0] alu_result,
     input logic [15:0] branch_target,
     input logic[15:0] jump_target,
@@ -22,7 +21,7 @@ module pc_logic(
     end
 
     //Conditional enabling: Allows to write in the PC if PCWrite Cond is activated
-    assign pc_write_enable = pc_write_cond ? zero_flag : 1'b0;
+    assign pc_write_enable = pc_write_cond;
 
 
 
